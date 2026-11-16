@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>フォト | FUNAKI KAZUKO</title>
+    <meta name="description" content="FUNAKI KAZUKOの写真作品。日常の中で出会った景色や光を撮影しています。">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&family=Noto+Sans+JP:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+
+    <!-- 共通の設定(ヘッダー・ナビ・フッター・ページ遷移) -->
+    <link rel="stylesheet" href="common.css">
+
+    <!-- このページ専用の設定 -->
+    <style>
+        /* ---------- タイトルが横からスライドして出る動き ---------- */
+        /* .slide を付けた行が、--i の順番に、左からスライドして現れます。
+       右から出したいときは、translateX(-48px) を translateX(48px) にしてください。 */
+        .slide {
+            display: block;
+            opacity: 0;
+            transform: translateX(-48px);
+            animation: slide-in 1s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+            animation-delay: calc(var(--i, 0) * 0.18s + 0.15s);
+        }
+
+        @keyframes slide-in {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* ---------- フォト ---------- */
+        .photo-page {
+            padding: 24px clamp(24px, 10.5vw, 60px) 0;
+        }
+
+        /* 2列のグリッド。最初のマスにタイトル、そのとなりに1枚目の写真 */
+        .photo-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: clamp(12px, 5.6vw, 24px);
+        }
+
+        .page-title {
+            margin: 0;
+            padding: 0 0 4px 12px;
+            /* 上の余白はなくす */
+            align-self: end;
+            /* マスの下に寄せる(一番下げた位置) */
+            font-family: var(--font-ja);
+            font-weight: 400;
+            font-size: clamp(22px, 6.5vw, 36px);
+            line-height: 1.6;
+            letter-spacing: 0.4em;
+        }
+
+        .shot {
+            --src: none;
+            --fallback: #ebe5e5;
+            align-self: start;
+            /* 写真が縦に伸びないようにする */
+            aspect-ratio: 1 / 1;
+            background-image: var(--src), linear-gradient(var(--fallback), var(--fallback));
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        /* 右上(1枚目)の写真だけを下げる */
+        .page-title+.shot {
+            margin-top: 24px;
+            /* 大きくするほど下がる */
+        }
+
+        /* 使用機材などの注釈 */
+        .photo-note {
+            margin: 16px 0 0;
+            font-size: 11px;
+            line-height: 1.9;
+            text-align: right;
+        }
+
+        /* フッターを上げる */
+        .footer {
+            margin-top: 50px;
+            /* 80px → 45px。小さいほど上がる */
+        }
+
+        /* ---------- PC ---------- */
+        @media (min-width: 768px) {
+            .photo-page {
+                padding: 56px 40px 0;
+            }
+
+            .photo-grid {
+                gap: 24px;
+            }
+
+            .page-title {
+                align-self: start;
+                padding: 32px 0 0 16px;
+                font-size: 36px;
+            }
+
+            .photo-note {
+                max-width: 520px;
+                margin-left: auto;
+                margin-right: auto;
+                font-size: 12px;
+            }
+
+            @media (min-width: 768px) {
+                .photo-page {
+                    padding: 56px 40px 0;
+                }
+
+                .photo-grid {
+                    max-width: 520px;
+                    /* グリッドの幅を狭くする */
+                    margin: 0 auto;
+                    /* ページの中央に置く */
+                    gap: 20px;
+                }
+
+
+            }
+        }
+
+        /* 「動きを減らす」設定の人には、動きなしで表示 */
+        @media (prefers-reduced-motion: reduce) {
+            .slide {
+                opacity: 1;
+                transform: none;
+                animation: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+
+        <header class="header">
+            <a class="logo" href="index.html">FUNAKI KAZUKO</a>
+            <button class="menu-btn" type="button" aria-label="メニューを開く" aria-expanded="false" aria-controls="menu">
+                <span></span><span></span><span></span>
+            </button>
+        </header>
+
+        <nav class="menu" id="menu" aria-label="メインメニュー">
+            <ul>
+                <li><a href="index.html">TOP</a></li>
+                <li><a href="about.html">ABOUT</a></li>
+                <li><a href="design.html">DESIGN</a></li>
+                <li><a href="photo.html">PHOTO</a></li>
+                <li><a href="https://www.instagram.com/o.h.a.n.a.0708/" target="_blank" rel="noopener">INSTAGRAM</a>
+                </li>
+            </ul>
+        </nav>
+
+        <main class="photo-page">
+            <div class="photo-grid">
+                <h1 class="page-title">
+                    <span class="slide" style="--i:0">フ</span>
+                    <span class="slide" style="--i:1">ォト</span>
+                    <span class="page-sub slide" style="--i:2" lang="en">PHOTO</span>
+                </h1>
+
+                <div class="shot" role="img" aria-label="白い壁の前の切り株に座る猫" style="--src:url('./img/neko.jpg')"></div>
+                <div class="shot" role="img" aria-label="階段に座る人" style="--src:url('./img/kaidan.jpg')"></div>
+                <div class="shot" role="img" aria-label="メリーゴーランドの馬" style="--src:url('./img/meri-goround_sikaku.jpg')">
+                </div>
+                <div class="shot" role="img" aria-label="窓辺の喫茶店" style="--src:url('./img/costa.jpg')"></div>
+                <div class="shot" role="img" aria-label="青空と桜" style="--src:url('./img/sakura.JPG')"></div>
+                <div class="shot" role="img" aria-label="カフェのスイーツとドリンク" style="--src:url('./img/rousokuyo.JPG')"></div>
+                <div class="shot" role="img" aria-label="オリーブ畑" style="--src:url('./img/olive.jpg')"></div>
+                <div class="shot" role="img" aria-label="コンテナの前に立つ人" style="--src:url('./img/nobu.jpg')"></div>
+                <div class="shot" role="img" aria-label="カレーのプレート" style="--src:url('./img/curry.jpg')"></div>
+            </div>
+
+            <p class="photo-note">
+                使用機材 : Canon M100<br>
+                使用ソフト : Lightroom
+            </p>
+        </main>
+
+        <footer class="footer">
+            <a class="insta" href="https://www.instagram.com/o.h.a.n.a.0708/" target="_blank" rel="noopener"
+                aria-label="Instagram">
+                <svg viewBox="0 0 32 32" aria-hidden="true">
+                    <defs>
+                        <linearGradient id="ig" x1="0" y1="1" x2="1" y2="0">
+                            <stop offset="0" stop-color="#feda75" />
+                            <stop offset="0.3" stop-color="#fa7e1e" />
+                            <stop offset="0.55" stop-color="#d62976" />
+                            <stop offset="0.8" stop-color="#962fbf" />
+                            <stop offset="1" stop-color="#4f5bd5" />
+                        </linearGradient>
+                    </defs>
+                    <rect width="32" height="32" rx="8" fill="url(#ig)" />
+                    <rect x="7.5" y="7.5" width="17" height="17" rx="5" fill="none" stroke="#fff" stroke-width="2" />
+                    <circle cx="16" cy="16" r="4" fill="none" stroke="#fff" stroke-width="2" />
+                    <circle cx="21.2" cy="10.8" r="1.2" fill="#fff" />
+                </svg>
+            </a>
+            <p class="copyright">©ohana2026</p>
+        </footer>
+    </div>
+
+    <script src="common.js"></script>
+</body>
+
+</html>
